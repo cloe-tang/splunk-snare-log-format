@@ -121,5 +121,51 @@ Step 8: Restart Splunk Universal Forwarder Service
 
 ![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/86a21c3e-5fce-4c37-8408-9eecd858a8bc)
 
+# Part 4 - Verify Result without Windows TA installed
+
+Step 1: In Splunk Indexer, check the index you have stream the logs to 
+
+<img width="802" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/7d6b79ad-78f8-4080-8ef9-3cf2c74e4a4c">
+
+Step 2: Verify the field that is being extracted by Splunk. As you realised not many fields are being extracted even by setting the sourcetype as window_snare_syslog
+
+<img width="814" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/6bea17e7-86d3-4a80-b2e8-35e0416e777c">
+
+Step 3: Have also enable Splunk Universal Forwarder to collect Windows Event Logs directly from the windows server. Result looks like the following which is more complete. 
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/eddc924c-5cdc-4662-875d-82fcf3e8c7de)
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/ee630f14-224e-4c3a-8c16-078779fba1ca)
+
+# Part 5 - Install and configure Add on for Windows TA 
+
+Step 1: Have the TA installed on Splunk Universal Forwarder, Splunk Heavy Forwarder and Splunk Indexer
+
+Step 2: Configure Add-on for Windows on Splunk Universal Forwarder. Paste the following configuration into inputs.conf in this director - C:\Program Files\SplunkUniversalForwarder\etc\apps\Splunk_TA_windows\local
+
+```
+[default]
+host=splunkwindows1
+
+[monitor://C:\Users\Administrator\Documents\snare]
+sourcetype = WinEventLog:System
+index = <your index>
+```
+
+Step 3: Rename the inputs.conf to inputs.conf.bkup in this directory - C:\Program Files\SplunkUniversalForwarder\etc\system\local
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/f575c7ce-f78b-4701-b805-2442f1e23138)
+
+Step 4 - Restart Splunk Universal Forwarder
+
+# Part 6 - Verify Result with Windows TA installed
+
+Step 1: In Splunk Indexer, check the index you have stream the logs to 
+
+<img width="818" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/41fe2b46-2759-4796-99e9-27a657cae030">
+
+Step 2: Verify the field that is being extracted by Splunk. As you realised more fields are extracted compared to Step 4 without TA installed
+
+<img width="789" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/cd72fd3c-0cca-4853-adfd-294c3c8d1cc8">
 
 
