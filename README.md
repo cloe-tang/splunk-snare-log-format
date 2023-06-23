@@ -69,11 +69,57 @@ Step 2: Configure nxlog agent to output window event logs in snare format and sa
 </Input>
 <Output out>
     Module      om_file
-    File	"C:\Users\Administrator\Documents\snare\output.log"
+    File	    "C:\Users\Administrator\Documents\snare\output.log"
 </Output>
 
 <Route 1>
     Path        eventlog => out
 </Route>
 ```
-<Input eventlog> instruct nxlog agent to collect Window Event log System. <Output out> instruct nxlog to output to a file. <Route 1> is to map input and output. 
+Input eventlog instruct nxlog agent to collect Window Event log System. Output out instruct nxlog to output to a file. <Route 1> is to map input and output. 
+
+Step 3: Restart the nxlog agent.
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/4094c938-30ee-4196-8c42-4294d5532700)
+
+Step 4: Verify that the Windows event log is saved in the output directory. 
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/3467fa86-722d-4107-a15a-30e0818bbcf1)
+
+Step 5: Configure Splunk Universal Forwarder to monitor the snare output file. Locate the inputs.conf in C:\Program Files\SplunkUniversalForwarder\etc\system\local. If the local folder or the inputs.conf is not  found, feel free to create it yourself. 
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/677a91c4-735c-401f-8125-16cf04832955)
+
+Step 6: Paste the following configuration into the inputs.conf file
+
+```
+[default]
+host=splunkwindows1
+
+[monitor://C:\Users\Administrator\Documents\snare]
+sourcetype = windows_snare_syslog
+index = <your index>
+```
+
+Step 7: Configure Splunk Universal Forwarder to forward the logs out to Splunk Heavy Forwarder. In the same folder (C:\Program Files\SplunkUniversalForwarder\etc\system\local), locate outputs.conf
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/d5785c24-9373-4931-ae17-a2c3182aacf5)
+
+Step 8: Paste the following configuration into the outputs.conf file
+
+```
+[tcpout]
+defaultGroup = default-autolb-group
+
+[tcpout:default-autolb-group]
+server = <your heavy forwarder IP>:9997
+
+[tcpout-server://<your heavy forwarder IP>:9997]
+```
+
+Step 8: Restart Splunk Universal Forwarder Service
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/86a21c3e-5fce-4c37-8408-9eecd858a8bc)
+
+
+
