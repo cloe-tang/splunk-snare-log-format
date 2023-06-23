@@ -20,6 +20,23 @@ Note that all component are installed with Add-on for Windows.
 
 ## Pre-requisites
 
-1. nxlog agent should be installed. If not installed, please download the community installer from https://nxlog.co/products/nxlog-community-edition and have it installed in the windows servers.
-2. Splunk Universal Forwarder should be installed. If not installed, please download from <a href="https://www.splunk.com/en_us/download/universal-forwarder.html?_gl=1*a91uvm*_ga*NzcxNjkwMjIxLjE2NjUzNjE0NTM.*_ga_5EPM2P39FV*MTY4NzUxNDA0My45MDEuMC4xNjg3NTE0MDQzLjYwLjAuMA..&_ga=2.69836435.261926414.1687152020-771690221.1665361453&_gac=1.48488788.1687187465.CjwKCAjw-b-kBhB-EiwA4fvKrPt1pXmmDzQo_KzDHthk4SBAyzjabM4ygxJ5d1u33REUZSF0wnR-pBoC1UUQAvD_BwE">Splunk Universal Forwarder</a>
+1. nxlog agent should be installed. If not installed, please download the community installer from <a href="https://nxlog.co/products/nxlog-community-edition">nxlog agent</a> and have it installed in the windows servers.
+2. Splunk Universal Forwarder should be installed. If not installed, please download from <a href="https://www.splunk.com/en_us/download/universal-forwarder.html?_gl=1*a91uvm*_ga*NzcxNjkwMjIxLjE2NjUzNjE0NTM.*_ga_5EPM2P39FV*MTY4NzUxNDA0My45MDEuMC4xNjg3NTE0MDQzLjYwLjAuMA..&_ga=2.69836435.261926414.1687152020-771690221.1665361453&_gac=1.48488788.1687187465.CjwKCAjw-b-kBhB-EiwA4fvKrPt1pXmmDzQo_KzDHthk4SBAyzjabM4ygxJ5d1u33REUZSF0wnR-pBoC1UUQAvD_BwE">Splunk Universal Forwarder</a>. Follow this <a href="https://docs.splunk.com/Documentation/Forwarder/9.0.5/Forwarder/Installanixuniversalforwarder">guide</a> to perform the installation
+3. Splunk Heavy Forwarder and Splunk Indexer should be installed. Both component use the same installer.
+
+# Part 1 - Setup Splunk Indexer
+
+Step 1: Create indexes to take in the snare logs
+
+Step 2: Ensure receiving port is configured to listen on port 9997. It should be listening by default.
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/f7acc6ce-32ca-49c7-bd2e-f3a006917856)
+
+# Part 2 - Setup Splunk Heavy Forwarder
+
+Step 1: Configure the forwarding port
+
+<img width="953" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/d20a8156-3832-4654-96f9-2c275450c5cc">
+
+
 
