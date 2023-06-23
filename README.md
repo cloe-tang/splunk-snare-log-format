@@ -38,5 +38,42 @@ Step 1: Configure the forwarding port
 
 <img width="953" alt="image" src="https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/d20a8156-3832-4654-96f9-2c275450c5cc">
 
+Step 2: Ensure receiving port is configured to listen on port 9997. It should be listening by default.
 
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/f7acc6ce-32ca-49c7-bd2e-f3a006917856)
 
+# Part 3 - Setup Windows Server
+
+Step 1: Locate the nxlog.conf file in C:\Program Files\nxlog\conf
+
+![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/1dfcb952-e667-42cc-acea-32449c25d4a0)
+
+Step 2: Configure nxlog agent to output window event logs in snare format and save it in a file. Append the following configuration to the last part of nxlog.conf file. 
+
+```
+<Input eventlog>
+    Module    im_msvistalog
+    <QueryXML>
+        <QueryList>
+            <Query Id='0'>
+                <Select Path="System">*</Select>
+            </Query>
+        </QueryList>
+    </QueryXML>
+    <Exec>
+        # Replace any tabs or newline with a space
+        $Message =~ s/(\t|\R)/ /g;
+
+        to_syslog_snare();
+    </Exec>
+</Input>
+<Output out>
+    Module      om_file
+    File	"C:\Users\Administrator\Documents\snare\output.log"
+</Output>
+
+<Route 1>
+    Path        eventlog => out
+</Route>
+```
+<Input eventlog> instruct nxlog agent to collect Window Event log System. <Output out> instruct nxlog to output to a file. <Route 1> is to map input and output. 
