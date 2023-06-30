@@ -24,7 +24,7 @@ Note that all component are installed with Add-on for Windows.
 2. Splunk Universal Forwarder should be installed. If not installed, please download from <a href="https://www.splunk.com/en_us/download/universal-forwarder.html?_gl=1*a91uvm*_ga*NzcxNjkwMjIxLjE2NjUzNjE0NTM.*_ga_5EPM2P39FV*MTY4NzUxNDA0My45MDEuMC4xNjg3NTE0MDQzLjYwLjAuMA..&_ga=2.69836435.261926414.1687152020-771690221.1665361453&_gac=1.48488788.1687187465.CjwKCAjw-b-kBhB-EiwA4fvKrPt1pXmmDzQo_KzDHthk4SBAyzjabM4ygxJ5d1u33REUZSF0wnR-pBoC1UUQAvD_BwE">Splunk Universal Forwarder</a>. Follow this <a href="https://docs.splunk.com/Documentation/Forwarder/9.0.5/Forwarder/Installanixuniversalforwarder">guide</a> to perform the installation
 3. Splunk Heavy Forwarder and Splunk Indexer should be installed. Both component use the same installer.
 
-# Part 1 - Setup Splunk Indexer
+## Part 1 - Setup Splunk Indexer
 
 Step 1: Create indexes to take in the snare logs
 
@@ -32,7 +32,7 @@ Step 2: Ensure receiving port is configured to listen on port 9997. It should be
 
 ![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/f7acc6ce-32ca-49c7-bd2e-f3a006917856)
 
-# Part 2 - Setup Splunk Heavy Forwarder
+## Part 2 - Setup Splunk Heavy Forwarder
 
 Step 1: Configure the forwarding port
 
@@ -42,7 +42,7 @@ Step 2: Ensure receiving port is configured to listen on port 9997. It should be
 
 ![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/f7acc6ce-32ca-49c7-bd2e-f3a006917856)
 
-# Part 3 - Setup Windows Server
+## Part 3 - Setup Windows Server
 
 Step 1: Locate the nxlog.conf file in C:\Program Files\nxlog\conf
 
@@ -121,7 +121,7 @@ Step 8: Restart Splunk Universal Forwarder Service
 
 ![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/86a21c3e-5fce-4c37-8408-9eecd858a8bc)
 
-# Part 4 - Verify Result without Windows TA installed
+## Part 4 - Verify Result without Windows TA installed
 
 Step 1: In Splunk Indexer, check the index you have stream the logs to 
 
@@ -137,7 +137,7 @@ Step 3: Have also enable Splunk Universal Forwarder to collect Windows Event Log
 
 ![image](https://github.com/cloe-tang/splunk-snare-log-format/assets/58005106/ee630f14-224e-4c3a-8c16-078779fba1ca)
 
-# Part 5 - Install and configure Add on for Windows TA 
+## Part 5 - Install and configure Add on for Windows TA 
 
 Step 1: Have the TA installed on Splunk Universal Forwarder, Splunk Heavy Forwarder and Splunk Indexer
 
@@ -158,7 +158,7 @@ Step 3: Rename the inputs.conf to inputs.conf.bkup in this directory - C:\Progra
 
 Step 4 - Restart Splunk Universal Forwarder
 
-# Part 6 - Verify Result with Windows TA installed
+## Part 6 - Verify Result with Windows TA installed
 
 Step 1: In Splunk Indexer, check the index you have stream the logs to 
 
